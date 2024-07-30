@@ -309,7 +309,7 @@ namespace SharpDocx
 
         protected void ImageFromStream(Stream stream, int percentage = 100, string extension = null)
         {
-            PartTypeInfo imagePartType;
+            ImagePartType  imagePartType;
 
             if (extension == null)
             {
@@ -320,7 +320,7 @@ namespace SharpDocx
                     return;
                 }
 
-                imagePartType = ImageHelper.GetImagePartType(info.Type).GetValueOrDefault();
+                imagePartType = ImageHelper.GetImagePartType(info.Type);
             }
             else
             {
@@ -330,7 +330,7 @@ namespace SharpDocx
             ImageInternal(stream, imagePartType, percentage);
         }
 
-        protected void ImageInternal(Stream stream, PartTypeInfo type, int percentage = 100)
+        protected void ImageInternal(Stream stream, ImagePartType type, int percentage = 100)
         {
             const long emusPerTwip = 635;
             var maxWidthInEmus = GetPageContentWidthInTwips() * emusPerTwip;
